@@ -6,5 +6,7 @@ def main():
     # Draw the line on the window's canvas
     win.draw_line(line, fill_color="black")
     win.wait_for_close()
+    print("hello")
 
 main()
+
