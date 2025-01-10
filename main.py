@@ -1,5 +1,6 @@
 from graphics import Window, Line, Point
 from maze import Maze
+import random
 
 def main():
     num_rows = 12
@@ -11,7 +12,7 @@ def main():
     cell_size_y = (screen_y - 2 * margin) / num_rows
     win = Window(screen_x, screen_y)
 
-    maze = Maze(margin,margin,num_rows,num_cols,cell_size_x,cell_size_y,win)
+    maze = Maze(margin,margin,num_rows,num_cols,cell_size_x,cell_size_y,win, seed = random.randint(1,100))
     win.wait_for_close()
     print("hello")
 
