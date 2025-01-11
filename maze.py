@@ -1,6 +1,7 @@
 from cell import Cell
 import time
 import random
+from graphics import Line,  Point
 class Maze:
     def __init__(self,x1,y1,num_rows,num_cols,cell_size_x,cell_size_y,win,seed):
         self.x1 = x1
@@ -85,3 +86,35 @@ class Maze:
         for col in self.cells:
             for cell in col:
                 cell.visited = False
+    def solve(self):
+        return self.solve_r(0,0)
+    def solve_r(self,i,j):
+        self.animate()
+        self.cells[i][j].visited = True
+        if self.cells[i][j] == self.cells[self.num_cols-1][self.num_rows-1]:
+            return True
+        if j > 0 and not self.cells[i][j-1].visited and not self.cells[i][j].topwall:
+            self.cells[i][j].draw_move(self.cells[i][j-1],False)
+            if self.solve_r(i,j-1):
+                return True
+            else:
+                self.cells[i][j].draw_move(self.cells[i][j-1],True)
+        if j < self.num_rows-1 and not self.cells[i][j+1].visited and not self.cells[i][j].bottomwall:
+            self.cells[i][j].draw_move(self.cells[i][j+1],False)
+            if self.solve_r(i,j+1):
+                return True
+            else:
+                self.cells[i][j].draw_move(self.cells[i][j+1],True)
+        if i > 0 and not self.cells[i-1][j].visited and not self.cells[i][j].leftwall:
+            self.cells[i][j].draw_move(self.cells[i-1][j],False)
+            if self.solve_r(i-1,j):
+                return True
+            else:
+                self.cells[i][j].draw_move(self.cells[i-1][j],True)
+        if i < self.num_cols-1 and not self.cells[i+1][j].visited and not self.cells [i][j].rightwall:
+            self.cells[i][j].draw_move(self.cells[i+1][j],False)
+            if self.solve_r(i+1,j):
+                return True
+            else:
+                self.cells[i][j].draw_move(self.cells[i+1][j],True)
+        return False

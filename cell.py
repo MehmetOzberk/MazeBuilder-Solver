@@ -38,10 +38,13 @@ class Cell:
         else:
             self.win.draw_line(bottomline,"white")  
     
-    def draw_move(self, to_cell, undo=False):
+    def draw_move(self, to_cell, undo):
         selfymid = (self.y1-self.y2)/2+self.y2
         selfxmid = (self.x2-self.x1)/2+self.x1
         otherymid = (to_cell.y1-to_cell.y2)/2+to_cell.y2
         otherxmid = (to_cell.x2-to_cell.x1)/2+to_cell.x1
         centerline = Line(Point(selfxmid,selfymid),Point(otherxmid,otherymid)) 
-        self.win.draw_line(centerline,"black")
+        if undo:
+            self.win.draw_line(centerline,"white")
+        else:
+            self.win.draw_line(centerline,"red")
