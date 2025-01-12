@@ -4,6 +4,7 @@ import random
 import keyboard 
 import os
 
+##test
 def exit_on_key(keyname):
     """ Create callback function that exits current process when the key with
         the given name is pressed.
